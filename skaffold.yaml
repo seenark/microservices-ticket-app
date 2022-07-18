@@ -1,0 +1,19 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - "./infra/k8s/*"
+build:
+  local:
+    push: false
+  artifacts:
+    - image: hadesgod/auth
+      context: "./auth"
+      docker:
+        dockerfile: Dockerfile
+        target: dev
+      sync:
+        manual:
+          - dest: "/usr/src/app"
+            src: "src/**/*.ts"
