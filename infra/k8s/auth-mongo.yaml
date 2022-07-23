@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  auth-mongo
+  namespace: default
+  labels:
+    app:  auth-mongo
+spec:
+  selector:
+    matchLabels:
+      app: auth-mongo
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app:  auth-mongo
+    spec:
+      # initContainers:
+        # Init containers are exactly like regular containers, except:
+          # - Init containers always run to completion.
+          # - Each init container must complete successfully before the next one starts.
+      containers:
+      - name:  auth-mongo
+        image: mongo 
+        ports:
+        - containerPort:  80
+          name:  auth-mongo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-mongo
+  namespace: default
+spec:
+  selector:
+    app: auth-mongo
+  type: ClusterIP
+  ports:
+  - name: auth-mongo
+    protocol: TCP
+    port: 27017 
+    targetPort: 27017
+    # If you set the `spec.type` field to `NodePort` and you want a specific port number,
+    # you can specify a value in the `spec.ports[*].nodePort` field.
