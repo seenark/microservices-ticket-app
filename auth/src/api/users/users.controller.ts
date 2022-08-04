@@ -7,15 +7,13 @@ import {
   HttpStatus,
   Logger,
   Post,
-  Req,
   Res,
   UseGuards,
 } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { Request } from "express";
-import { ResponseExtend } from "src/extends.types";
-import { JwtAuthGuard } from "src/jwt-auth.guard";
-import { LocalAuthGuard } from "src/local-auth.guard";
+import { ResponseExtend } from "../../extends.types";
+import { JwtAuthGuard } from "../../jwt-auth.guard";
+import { LocalAuthGuard } from "../../local-auth.guard";
 import { TUserData, UserData } from "./user-data.decorator";
 import { TSignUp, UserValidationPipe } from "./user-validation.pipe";
 import { UsersService } from "./users.service";

@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Schema as MSchema } from "mongoose";
 
-export type UserDocument = User & Document<string, User, User>;
+export type UserDocument = User & Document;
 
 @Schema({
   timestamps: true,
