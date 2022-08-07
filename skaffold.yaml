@@ -17,3 +17,21 @@ build:
         manual:
           - dest: "/usr/src/app"
             src: "src/**/*.ts"
+    - image: hadesgod/tickets
+      context: "./tickets"
+      docker:
+        dockerfile: Dockerfile
+        target: dev
+      sync:
+        manual:
+          - dest: "/usr/src/app"
+            src: "src/**/*.ts"
+    - image: hadesgod/ticket-client
+      context: "./client"
+      docker:
+        dockerfile: Dockerfile
+        target: dev
+      sync:
+        manual:
+          - dest: "/app"
+            src: "**/*.{ts,tsx}"

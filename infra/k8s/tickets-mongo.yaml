@@ -1,42 +1,42 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth-mongo
+  name: tickets-mongo
   namespace: default
   labels:
-    app: auth-mongo
+    app: tickets-mongo
 spec:
   selector:
     matchLabels:
-      app: auth-mongo
+      app: tickets-mongo
   replicas: 1
   template:
     metadata:
       labels:
-        app: auth-mongo
+        app: tickets-mongo
     spec:
       # initContainers:
       # Init containers are exactly like regular containers, except:
       # - Init containers always run to completion.
       # - Each init container must complete successfully before the next one starts.
       containers:
-        - name: auth-mongo
+        - name: tickets-mongo
           image: mongo
           ports:
             - containerPort: 80
-              name: auth-mongo
+              name: tickets-mongo
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-mongo
+  name: tickets-mongo
   namespace: default
 spec:
   selector:
-    app: auth-mongo
+    app: tickets-mongo
   type: ClusterIP
   ports:
-    - name: auth-mongo
+    - name: tickets-mongo
       protocol: TCP
       port: 27017
       targetPort: 27017

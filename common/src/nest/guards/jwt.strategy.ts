@@ -3,14 +3,15 @@ import { ConfigService } from "@nestjs/config";
 import { PassportStrategy } from "@nestjs/passport";
 import { Request } from "express";
 import { ExtractJwt, JwtFromRequestFunction, Strategy } from "passport-jwt";
-import { TEnv } from "./env.validate";
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
   private logger = new Logger(JwtStrategy.name);
-  constructor(private readonly configService: ConfigService<TEnv>) {
+  constructor(
+    private readonly configService: ConfigService<{ JWT_SECRET: string }>
+  ) {
     const jwtExtractor: JwtFromRequestFunction = (
-      req: Request,
+      req: Request
     ): string | null => {
       const jwt = req.cookies["jwt"];
       this.logger.log("jwt", jwt);

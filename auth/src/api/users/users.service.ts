@@ -13,7 +13,7 @@ export class UsersService {
   async createUser(email: string, password: string) {
     try {
       const user = await this.userModel.findOne({ email });
-      if (!user) return null;
+      if (user) return null;
       const newUser = new this.userModel({ email: email, password: password });
       const resUser = await newUser.save();
       return {

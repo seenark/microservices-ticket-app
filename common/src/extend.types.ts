@@ -9,7 +9,7 @@ export type TCookieOption = {
 export type TCookie = (
   key: string,
   value: any,
-  options?: TCookieOption,
+  options?: TCookieOption
 ) => void;
 
 export type ResponseExtend = Response & TCookie;

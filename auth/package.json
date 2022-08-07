@@ -18,9 +18,11 @@
     "test:watch": "jest --watch --verbose false",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e:watch": "jest --config ./test/jest-e2e.json --watch"
   },
   "dependencies": {
+    "@hdgticket/common": "^1.0.2",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
@@ -30,7 +32,6 @@
     "@nestjs/platform-express": "^9.0.0",
     "argon2": "^0.28.7",
     "cookie-parser": "^1.4.6",
-    "mongodb-memory-server": "^8.7.2",
     "mongoose": "^6.4.6",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
