@@ -22,7 +22,7 @@
     "test:e2e:watch": "yarn test:e2e --watch"
   },
   "dependencies": {
-    "@hdgticket/common": "^0.0.6",
+    "@hdgticket/common": "^0.0.7",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",

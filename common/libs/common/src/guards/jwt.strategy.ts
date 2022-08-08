@@ -13,9 +13,13 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     const jwtExtractor: JwtFromRequestFunction = (
       req: Request,
     ): string | null => {
-      const jwt = req.cookies['jwt'];
-      this.logger.log('jwt', jwt);
-      return jwt;
+      try {
+        const jwt = req.cookies['jwt'];
+        this.logger.log('jwt', jwt);
+        return jwt;
+      } catch (error) {
+        return null;
+      }
     };
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([jwtExtractor]),

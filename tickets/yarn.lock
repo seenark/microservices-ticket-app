@@ -351,10 +351,10 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@hdgticket/common@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@hdgticket/common/-/common-0.0.6.tgz#259a02bef27ab7ed4b5f86c5db6eb7d5fb3bd991"
-  integrity sha512-jLz3fienEkht/pSgd9nQRDYxJQorrqpRWIhIDvKggAv3j9oERvKyZoA+2qpMXMdwgRIlLLhBv/OtQ2SqDP9a1Q==
+"@hdgticket/common@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@hdgticket/common/-/common-0.0.7.tgz#1615c00acd952d4f2410efa85af34de182118b6e"
+  integrity sha512-FDsrU/fR6ZtehexWZJle8O0REfFzJAXuMVKPq12/lHGa2L5TOCsNw1GcT1DNKGpW4N9hZuXuwTQuOI4s3DCIbA==
   dependencies:
     "@nestjs/common" "^9.0.0"
     "@nestjs/config" "^2.2.0"
