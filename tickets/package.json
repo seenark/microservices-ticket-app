@@ -1,19 +1,14 @@
 {
-  "name": "@hdgticket/common",
-  "version": "0.0.6",
+  "name": "tickets",
+  "version": "0.0.1",
   "description": "",
   "author": "",
-  "private": false,
-  "license": "MIT",
-  "main": "dist/libs/common/index.js",
-  "types": "dist/libs/common/index.d.ts",
-  "files": [
-    "dist/**/*"
-  ],
+  "private": true,
+  "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"libs/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -24,22 +19,22 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "build:lib:common": "npm run prebuild && nest build common --tsc",
-    "pub": "npm run build:lib:common && npm version patch --no-git-tag-version && npm publish --access public"
+    "test:e2e:watch": "yarn test:e2e --watch"
   },
   "dependencies": {
+    "@hdgticket/common": "^0.0.6",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/jwt": "^9.0.0",
+    "@nestjs/mongoose": "^9.2.0",
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
-    "@types/passport": "^1.0.9",
-    "@types/passport-jwt": "^3.0.6",
-    "passport": "^0.6.0",
-    "passport-jwt": "^4.0.0",
+    "mongoose": "^6.5.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "zod": "^3.17.10"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
@@ -70,7 +65,7 @@
       "json",
       "ts"
     ],
-    "rootDir": ".",
+    "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
@@ -78,14 +73,7 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
-    "coverageDirectory": "./coverage",
-    "testEnvironment": "node",
-    "roots": [
-      "<rootDir>/src/",
-      "<rootDir>/libs/"
-    ],
-    "moduleNameMapper": {
-      "^@lib/common(|/.*)$": "<rootDir>/libs/common/src/$1"
-    }
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
   }
 }

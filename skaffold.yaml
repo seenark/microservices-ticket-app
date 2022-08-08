@@ -26,6 +26,8 @@ build:
         manual:
           - dest: "/usr/src/app"
             src: "src/**/*.ts"
+          - dest: "usr/src/app"
+            src: "test/**/*.ts"
     - image: hadesgod/ticket-client
       context: "./client"
       docker:

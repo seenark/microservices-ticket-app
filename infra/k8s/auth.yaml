@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  auth
+  name: auth
   namespace: default
   labels:
-    app:  auth
+    app: auth
 spec:
   selector:
     matchLabels:
@@ -13,46 +13,47 @@ spec:
   template:
     metadata:
       labels:
-        app:  auth
+        app: auth
     spec:
       containers:
-      - name:  auth
-        image:  hadesgod/auth
-        # resources:
-        #   requests:
-        #     cpu: 100m
-        #     memory: 100Mi
-        #   limits:
-        #     cpu: 100m
-        #     memory: 100Mi
-        livenessProbe:
-          tcpSocket:
-            port: 4000
-          initialDelaySeconds: 5
-          timeoutSeconds: 5
-          successThreshold: 1
-          failureThreshold: 3
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 4000
-          initialDelaySeconds: 5
-          timeoutSeconds: 2
-          successThreshold: 1
-          failureThreshold: 3
-          periodSeconds: 10
-        ports:
-        - containerPort:  4000
-          name:  auth
-        env:
-          - name: JWT_SECRET
-            valueFrom:
-              secretKeyRef:
-                name:  jwt-secret
-                key:  JWT_SECRET
+        - name: auth
+          image: hadesgod/auth
+          # resources:
+          #   requests:
+          #     cpu: 100m
+          #     memory: 100Mi
+          #   limits:
+          #     cpu: 100m
+          #     memory: 100Mi
+          livenessProbe:
+            tcpSocket:
+              port: 4000
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 4000
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+            successThreshold: 1
+            failureThreshold: 3
+            periodSeconds: 10
+          ports:
+            - containerPort: 4000
+              name: auth
+          env:
+            - name: MONGO_URI
+              value: mongodb://auth-mongo/auth
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_SECRET
       restartPolicy: Always
-
 
 ---
 apiVersion: v1
@@ -69,10 +70,10 @@ spec:
     clientIP:
       timeoutSeconds: 10800
   ports:
-  - name: auth
-    protocol: TCP
-    port: 80
-    targetPort: 4000
-    # If you set the `spec.type` field to `NodePort` and you want a specific port number,
-    # you can specify a value in the `spec.ports[*].nodePort` field.
-    # nodePort: 3000
+    - name: auth
+      protocol: TCP
+      port: 80
+      targetPort: 4000
+      # If you set the `spec.type` field to `NodePort` and you want a specific port number,
+      # you can specify a value in the `spec.ports[*].nodePort` field.
+      # nodePort: 3000

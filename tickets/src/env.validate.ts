@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 const EnvSchema = z.object({
-  MONGO_URI: z.string(),
   JWT_SECRET: z.string(),
+  MONGO_URI: z.string(),
 });
 
 export type TEnv = z.infer<typeof EnvSchema>;
@@ -12,8 +12,9 @@ export function validateEnv(
 ): Record<string, string> {
   try {
     const env = EnvSchema.parse(config);
+    console.log("env", env);
     return env;
-  } catch (error) {
-    throw new Error("Env is invalid");
+  } catch (error: any) {
+    throw new Error(JSON.stringify(error));
   }
 }

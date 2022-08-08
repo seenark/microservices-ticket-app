@@ -21,7 +21,15 @@ import { TEnv, validateEnv } from "./env.validate";
       isGlobal: true,
       validate: validateEnv,
     }),
-    MongooseModule.forRoot("mongodb://auth-mongo/auth"),
+    // MongooseModule.forRoot("mongodb://auth-mongo/auth"),
+    MongooseModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService<TEnv>) => {
+        return {
+          uri: configService.get("MONGO_URI"),
+        };
+      },
+    }),
     MongooseModule.forFeatureAsync([
       {
         name: User.name,
