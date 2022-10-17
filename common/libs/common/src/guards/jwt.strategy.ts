@@ -1,11 +1,11 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { PassportStrategy } from '@nestjs/passport';
-import { Request } from 'express';
-import { ExtractJwt, JwtFromRequestFunction, Strategy } from 'passport-jwt';
+import { Injectable, Logger } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { PassportStrategy } from "@nestjs/passport";
+import { Request } from "express";
+import { ExtractJwt, JwtFromRequestFunction, Strategy } from "passport-jwt";
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
+export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
   private logger = new Logger(JwtStrategy.name);
   constructor(
     private readonly configService: ConfigService<{ JWT_SECRET: string }>,
@@ -14,8 +14,8 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
       req: Request,
     ): string | null => {
       try {
-        const jwt = req.cookies['jwt'];
-        this.logger.log('jwt', jwt);
+        const jwt = req.cookies["jwt"];
+        this.logger.log("jwt", jwt);
         return jwt;
       } catch (error) {
         return null;
@@ -24,7 +24,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([jwtExtractor]),
       ignoreExpiration: false,
-      secretOrKey: configService.get('JWT_SECRET'),
+      secretOrKey: configService.get("JWT_SECRET"),
     });
   }
 

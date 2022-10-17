@@ -12,6 +12,7 @@ metadata:
 spec:
   rules:
     - host: app.rustaship.cloudns.ph
+      # - host: hadesgod.com
       http:
         paths:
           - path: /api/users/?(.*)
@@ -19,6 +20,27 @@ spec:
             backend:
               service:
                 name: auth
+                port:
+                  number: 80
+          - path: /api/tickets/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: tickets
+                port:
+                  number: 80
+          - path: /api/orders/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: orders
+                port:
+                  number: 80
+          - path: /api/payments/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: payments
                 port:
                   number: 80
           - path: /?(.*)

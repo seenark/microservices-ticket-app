@@ -48,11 +48,18 @@ spec:
           env:
             - name: MONGO_URI
               value: "mongodb://tickets-mongo/tickets"
+            - name: NATS_URL
+              value: nats://nats:4222
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_SECRET
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+
       restartPolicy: Always
 
 ---
@@ -73,7 +80,7 @@ spec:
     - name: tickets
       protocol: TCP
       port: 80
-      targetPort: 4000
+      targetPort: 3000
       # If you set the `spec.type` field to `NodePort` and you want a specific port number,
       # you can specify a value in the `spec.ports[*].nodePort` field.
       # nodePort: 3000

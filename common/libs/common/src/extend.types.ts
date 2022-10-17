@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { Response } from "express";
 
 export type TCookieOption = {
   maxAge?: number; // in milli sec

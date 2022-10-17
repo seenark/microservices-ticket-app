@@ -345,16 +345,23 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@hdgticket/common@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@hdgticket/common/-/common-1.0.2.tgz#efeecefd9773689828548c16ea5da36077aaa08c"
-  integrity sha512-1NVzj7ckkXs5NsT4nkbf72Tdt/K8LExS2fzTyzGLqf6OhWIOIheiCNLLS71Dzv3cLDG5dFD4Cjxj0jo6KhoYQw==
+"@hdgticket/common@^0.0.16":
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/@hdgticket/common/-/common-0.0.16.tgz#46689e3e0c1707fefba030609a8e2003ce3ae3f5"
+  integrity sha512-XpIkbqWQhOjXzDk9WjHpn3/TPCgll4OG4mZt2FrCTeivPuLBd+sBwGXHvrV67Gq5CjygHgjRewZbhVJhIV09yw==
   dependencies:
-    "@nestjs/common" "^9.0.8"
+    "@nestjs/common" "^9.0.0"
     "@nestjs/config" "^2.2.0"
+    "@nestjs/core" "^9.0.0"
     "@nestjs/passport" "^9.0.0"
+    "@nestjs/platform-express" "^9.0.0"
+    "@types/passport" "^1.0.9"
     "@types/passport-jwt" "^3.0.6"
+    passport "^0.6.0"
     passport-jwt "^4.0.0"
+    reflect-metadata "^0.1.13"
+    rimraf "^3.0.2"
+    rxjs "^7.2.0"
 
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.5"
@@ -682,15 +689,6 @@
   version "9.0.3"
   resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-9.0.3.tgz#f955e7ff42a5d86c33a55022f00a349bc54666f3"
   integrity sha512-QPUdWb6srXmJeRlnavLa0FHFXtgajm/WsyYn/MlHpzqTv7VRfB/zLicwPofdH+CozVvzoZp+c63Khuysg9uasw==
-  dependencies:
-    iterare "1.2.1"
-    tslib "2.4.0"
-    uuid "8.3.2"
-
-"@nestjs/common@^9.0.8":
-  version "9.0.8"
-  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-9.0.8.tgz#7a1bf829a79a4e4c53e943feda4181813d6f36c2"
-  integrity sha512-x6+qGRnTEZmg0jzqPUW8uPCK6qPjc7JGmeHszZOso1YCCKNiqaCM4NY6ndbl2Of3kWSpq3qE4thCmuZ/4DwBQA==
   dependencies:
     iterare "1.2.1"
     tslib "2.4.0"
@@ -1046,6 +1044,13 @@
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/@types/passport/-/passport-1.0.9.tgz#b32fa8f7485dace77a9b58e82d0c92908f6e8387"
   integrity sha512-9+ilzUhmZQR4JP49GdC2O4UdDE3POPLwpmaTC/iLkW7l0TZCXOo1zsTnnlXPq6rP1UsUZPfbAV4IUdiwiXyC7g==
+  dependencies:
+    "@types/express" "*"
+
+"@types/passport@^1.0.9":
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/@types/passport/-/passport-1.0.11.tgz#d046b41e28b280f4e7994614fb976e9b449cb7c6"
+  integrity sha512-pz1cx9ptZvozyGKKKIPLcVDVHwae4hrH5d6g5J+DkMRRjR3cVETb4jMabhXAUbg3Ov7T22nFHEgaK2jj+5CBpw==
   dependencies:
     "@types/express" "*"
 

@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expiration-redis
+  namespace: default
+  labels:
+    app: expiration-redis
+spec:
+  selector:
+    matchLabels:
+      app: expiration-redis
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: expiration-redis
+    spec:
+      # initContainers:
+      # Init containers are exactly like regular containers, except:
+      # - Init containers always run to completion.
+      # - Each init container must complete successfully before the next one starts.
+      containers:
+        - name: expiration-redis
+          image: redis
+          ports:
+            - containerPort: 6379
+              name: redis
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: expiration-redis
+  namespace: default
+spec:
+  selector:
+    app: expiration-redis
+  type: ClusterIP
+  ports:
+    - name: expiration-redis
+      protocol: TCP
+      port: 6379
+      targetPort: 6379
+      # If you set the `spec.type` field to `NodePort` and you want a specific port number,
+      # you can specify a value in the `spec.ports[*].nodePort` field.
+      # nodePort: 6379

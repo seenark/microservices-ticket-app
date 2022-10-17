@@ -9,7 +9,7 @@ const password = "1234";
 const id = "123";
 
 class MockUserModel {
-  constructor(private data: User) {}
+  constructor(private data: User) { }
   save = jest.fn().mockReturnValue({ email, _id: id, password });
   static findOne = jest.fn().mockReturnValue({ email, _id: id });
 }

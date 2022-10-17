@@ -4,6 +4,13 @@ deploy:
   kubectl:
     manifests:
       - "./infra/k8s/*"
+      # - "./infra/k8s/secret.yaml"
+      # - "./infra/k8s/auth-mongo.yaml"
+      # - "./infra/k8s/auth.yaml"
+      # - "./infra/k8s/nats.yaml"
+      # - "./infra/k8s/orders-mongo.yaml"
+      # - "./infra/k8s/orders.yaml"
+      # - "./infra/k8s/ingress.yaml"
 build:
   local:
     push: false
@@ -19,6 +26,39 @@ build:
             src: "src/**/*.ts"
     - image: hadesgod/tickets
       context: "./tickets"
+      docker:
+        dockerfile: Dockerfile
+        target: dev
+      sync:
+        manual:
+          - dest: "/usr/src/app"
+            src: "src/**/*.ts"
+          - dest: "usr/src/app"
+            src: "test/**/*.ts"
+    - image: hadesgod/expiration
+      context: "./expiration"
+      docker:
+        dockerfile: Dockerfile
+        target: dev
+      sync:
+        manual:
+          - dest: "/usr/src/app"
+            src: "src/**/*.ts"
+          - dest: "usr/src/app"
+            src: "test/**/*.ts"
+    - image: hadesgod/orders
+      context: "./orders"
+      docker:
+        dockerfile: Dockerfile
+        target: dev
+      sync:
+        manual:
+          - dest: "/usr/src/app"
+            src: "src/**/*.ts"
+          - dest: "usr/src/app"
+            src: "test/**/*.ts"
+    - image: hadesgod/payments
+      context: "./payments"
       docker:
         dockerfile: Dockerfile
         target: dev
