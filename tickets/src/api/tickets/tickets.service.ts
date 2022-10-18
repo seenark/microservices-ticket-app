@@ -86,7 +86,7 @@ export class TicketsService {
   }
 
   async findAll() {
-    return this.ticketModel.find();
+    return this.ticketModel.find({ orderId: undefined });
   }
 
   async findById(id: string) {

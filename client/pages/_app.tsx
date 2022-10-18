@@ -2,44 +2,27 @@ import "../styles/globals.css";
 import type { AppContext, AppProps } from "next/app";
 import AxiosClient from "../utils/build-client";
 import Header from "../components/Header";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 
 export type TUser = {
   email: string;
   id: string;
 };
 
-const MyApp = ({
-  Component,
-  pageProps,
-  currentUser,
-}: AppProps & { currentUser: TUser }) => {
+const stripePromise = loadStripe(
+  "pk_test_51LtBf9FsFJxYdlw1MLNdLqY45HJj7D2Gy4XXfzIsv18XMVfsvUiSoPfkuaro4ED5ULhghtJtnxvC9Yz8L7ChdvwI00MMy8iovV"
+);
+const MyApp = ({ Component, pageProps }: AppProps) => {
   console.log("pageProps", pageProps);
-  console.log("current", currentUser);
   return (
     <>
-      <Header currentUser={currentUser}></Header>
-      <Component {...pageProps} />;
+      <Header currentUser={pageProps.user}></Header>
+      <Elements stripe={stripePromise}>
+        <Component {...pageProps} />
+      </Elements>
     </>
   );
 };
 
-MyApp.getInitialProps = async (appCtx: AppContext) => {
-  try {
-    const res = await AxiosClient(appCtx.ctx).get<TUser>(
-      "/api/users/current-user"
-    );
-    let pageProps = {};
-    if (appCtx.Component && appCtx.Component.getInitialProps) {
-      pageProps = await appCtx.Component.getInitialProps(appCtx.ctx);
-    }
-    return {
-      pageProps,
-      currentUser: res.data,
-    };
-  } catch (error: any) {
-    return {
-      user: null,
-    };
-  }
-};
 export default MyApp;

@@ -1,8 +1,8 @@
 import axios, { Axios } from "axios";
-import { NextPageContext } from "next";
+import { IncomingMessage } from "http";
 
-export type TAxiosClient = (ctx: NextPageContext) => Axios;
-const axiosClient: TAxiosClient = ({ req }) => {
+export type TAxiosClient = (req?: IncomingMessage) => Axios;
+const axiosClient: TAxiosClient = ( req ) => {
   if (req != undefined) {
     // on SSR
     return axios.create({

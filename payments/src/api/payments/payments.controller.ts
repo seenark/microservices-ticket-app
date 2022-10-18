@@ -51,15 +51,24 @@ export class PaymentsController {
       });
     }
 
-    const charge = await this.paymentService.stripe.charges.create({
-      currency: 'usd',
-      amount: order.price * 100,
-      source: body.token,
-    });
+    // const charge = await this.paymentService.stripe.charges.create({
+    //   currency: 'usd',
+    //   amount: order.price * 100,
+    //   source: body.token,
+    // });
+
+    const paymentIntent =
+      await this.paymentService.stripe.paymentIntents.create({
+        amount: order.price * 100,
+        currency: 'usd',
+        description: `buy $${order.id}`,
+        payment_method: body.token,
+        confirm: true,
+      });
 
     const payment = await this.paymentService.createPayment(
       body.orderId,
-      charge.id,
+      paymentIntent.id,
     );
     this.logger.log('saved payment');
 
